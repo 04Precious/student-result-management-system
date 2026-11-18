@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Students | CampusDesk{% endblock %}{% block page_heading %}Student Management{% endblock %}{% block content %}
+<div class="intro"><div><div class="eyebrow">RECORDS</div><h1>Students</h1><p>Register students and manage their academic profiles.</p></div></div>
+<section class="panel"><div class="panel-head"><div><h2>Register new student</h2><p>Enter the student's details below.</p></div><span class="tag">NEW RECORD</span></div>
+<form action="/students/add" method="POST" class="form-grid">
+<label class="field">Full name<input type="text" name="name" placeholder="e.g. Rahul Sharma" required></label>
+<label class="field">Roll number<input type="text" name="roll_number" placeholder="e.g. MCA24001" required></label>
+<label class="field">Course<select name="course" required><option value="">Select course</option><option value="MCA">MCA</option><option value="BCA">BCA</option></select></label>
+<label class="field">Semester<select name="semester" required><option value="">Select semester</option>{% for i in range(1, 9) %}<option value="{{ i }}">Semester {{ i }}</option>{% endfor %}</select></label>
+<div class="form-actions"><button class="button primary" type="submit">＋ Register Student</button></div></form></section>
+<section class="panel"><div class="panel-head"><div><h2>Student records</h2><p>Search and review registered students.</p></div><span class="count">{{ students|length }} records</span></div>
+<form action="/students" method="GET" class="search-form"><input class="search-input" type="text" name="search" placeholder="Search by name or roll number..." value="{{ search }}"><button class="button secondary" type="submit">Search</button><a class="clear" href="/students">Clear</a></form>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Student</th><th>Roll number</th><th>Course</th><th>Semester</th><th>Action</th></tr></thead><tbody>
+{% for student in students %}<tr><td class="muted">#{{ student.id }}</td><td><strong>{{ student.name }}</strong></td><td><span class="code">{{ student.roll_number }}</span></td><td>{{ student.course }}</td><td>Semester {{ student.semester }}</td><td><form action="/students/delete/{{ student.id }}" method="POST" onsubmit="return confirm('Delete this student?')"><button class="button danger small-button" type="submit">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="6" class="empty">No students found. Register a student or change your search.</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}

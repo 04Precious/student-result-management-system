@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Dashboard | CampusDesk{% endblock %}{% block page_heading %}Dashboard{% endblock %}{% block content %}
+<div class="intro"><div><div class="eyebrow">OVERVIEW</div><h1>Welcome back, Administrator</h1><p>Here's what's happening in your academic management system.</p></div><a class="button primary" href="/students">＋ Register Student</a></div>
+<div class="stats">
+ <article class="stat"><div class="stat-label">TOTAL ENROLMENT</div><div class="stat-value">{{ total_students }}</div><div class="stat-label">Registered students</div></article>
+ <article class="stat"><div class="stat-label">ACADEMIC SETUP</div><div class="stat-value">{{ total_subjects }}</div><div class="stat-label">Available subjects</div></article>
+ <article class="stat"><div class="stat-label">SYSTEM STATUS</div><div class="stat-value active">Active</div><div class="stat-label">All core modules available</div></article>
+</div>
+<div class="section-head"><div><h2>Quick access</h2><p>Choose a module to manage academic information.</p></div></div>
+<div class="modules">
+<a class="module" href="/students"><span class="module-icon">♙</span><span><strong>Student Management</strong><small>Register, search and manage student records.</small></span><span class="arrow">↗</span></a>
+<a class="module" href="/subjects"><span class="module-icon">▤</span><span><strong>Subject Management</strong><small>Add subjects and maintain subject codes.</small></span><span class="arrow">↗</span></a>
+<a class="module" href="/marks"><span class="module-icon">✎</span><span><strong>Marks Entry</strong><small>Record and review student marks.</small></span><span class="arrow">↗</span></a>
+<a class="module" href="/results"><span class="module-icon">▣</span><span><strong>Result Generation</strong><small>View grades, percentages and student reports.</small></span><span class="arrow">↗</span></a>
+</div>{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Student Result Management System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="brand-icon">SO</span><span><b>Shoolini Online</b><small>STUDENT PORTAL</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav>
+      <a class="{% if request.endpoint == 'home' %}active{% endif %}" href="/"><span>⌂</span>Dashboard</a>
+      <a class="{% if request.endpoint == 'students' %}active{% endif %}" href="/students"><span>♙</span>Students</a>
+      <a class="{% if request.endpoint == 'subjects' %}active{% endif %}" href="/subjects"><span>▤</span>Subjects</a>
+      <a class="{% if request.endpoint == 'marks' %}active{% endif %}" href="/marks"><span>✎</span>Marks Entry</a>
+      <a class="{% if request.endpoint in ['results', 'student_result'] %}active{% endif %}" href="/results"><span>▣</span>Results</a>
+      <a href="/student"><span>◎</span>Student Portal</a>
+      {% if session.get("admin_logged_in") %}<a href="/logout"><span>↪</span>Logout</a>{% endif %}
+    </nav>
+    <div class="sidebar-bottom"><span class="online-dot"></span> System operational<small>MCA · Academic Project</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><small>ACADEMIC MANAGEMENT</small><strong>{% block page_heading %}Dashboard{% endblock %}</strong></div><span class="semester">{{ session.get("admin_name", "Amit Abhishek") }}</span></header>
+    <section class="content">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}<div class="flash-stack">{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <footer>Student Result Management System <span>·</span> Academic Administration Portal</footer>
+    </section>
+  </main>
+</div>
+</body>
+</html>

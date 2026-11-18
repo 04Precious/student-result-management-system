@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Student Result Portal | Shoolini Online{% endblock %}
+{% block page_heading %}Student Result Portal{% endblock %}
+{% block content %}
+<div class="intro"><div><div class="eyebrow">STUDENT ACCESS</div><h1>Check your result</h1><p>Enter your university roll number to view your result.</p></div></div>
+<section class="panel" style="max-width:600px;margin:0 auto 24px">
+<div class="panel-head"><div><h2>Result lookup</h2><p>Use the roll number registered by the administrator.</p></div><span class="tag">STUDENT</span></div>
+<form method="POST" action="/student" class="form-grid">
+<label class="field" style="grid-column:1/-1">University roll number<input name="roll_number" value="{{ roll_number }}" placeholder="Enter your roll number" required></label>
+<div class="form-actions"><button class="button primary" type="submit">View my result</button></div>
+</form>
+</section>
+{% if student and result %}
+<section class="marksheet">
+<div class="mark-head"><div class="eyebrow">ACADEMIC RECORD</div><h1>SHOOLINI ONLINE</h1><p>Student Performance Report</p></div>
+<div class="student-details"><div><span>STUDENT NAME</span><strong>{{ student.name }}</strong></div><div><span>ROLL NUMBER</span><strong>{{ student.roll_number }}</strong></div><div><span>COURSE</span><strong>{{ student.course }}</strong></div><div><span>SEMESTER</span><strong>{{ student.semester }}</strong></div></div>
+<div class="section-head"><div><h2>Subject-wise marks</h2><p>Maximum marks per subject: 100</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Subject</th><th>Subject code</th><th>Maximum marks</th><th>Marks obtained</th></tr></thead><tbody>{% for mark in marks %}<tr><td>{{ mark.subject_name }}</td><td>{{ mark.subject_code }}</td><td>100</td><td><strong>{{ mark.marks_obtained }}</strong></td></tr>{% endfor %}</tbody></table></div>
+<div class="summary"><div><span>TOTAL MARKS</span><strong>{{ result.total }} / {{ result.maximum }}</strong></div><div><span>PERCENTAGE</span><strong>{{ result.percentage }}%</strong></div><div><span>GRADE</span><strong>{{ result.grade }}</strong></div><div><span>FINAL RESULT</span><strong class="{{ 'text-pass' if result.status == 'PASS' else 'text-fail' }}">{{ result.status }}</strong></div></div>
+<div class="mark-footer"><span>Shoolini Online · Student Result Portal</span><span>Academic Record</span></div>
+</section>
+<div class="report-actions no-print"><button class="button primary" onclick="window.print()">Print / Save PDF</button></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Admin Login | Shoolini Online{% endblock %}
+{% block page_heading %}Administrator Login{% endblock %}
+{% block content %}
+<div class="intro"><div><div class="eyebrow">SECURE ACCESS</div><h1>Administrator sign in</h1><p>Sign in to manage students, subjects, marks and results.</p></div></div>
+<section class="panel" style="max-width:520px;margin:35px auto">
+<div class="panel-head"><div><h2>Admin access</h2><p>Enter your administrator credentials.</p></div><span class="tag">ADMIN</span></div>
+<form method="POST" action="/login" class="form-grid">
+<label class="field" style="grid-column:1/-1">Username<input name="username" autocomplete="username" placeholder="Administrator username" required></label>
+<label class="field" style="grid-column:1/-1">Password<input type="password" name="password" autocomplete="current-password" placeholder="Password" required></label>
+<div class="form-actions"><button class="button primary" type="submit">Sign in</button></div>
+</form>
+<div class="notice" style="margin-top:18px">Demo login: <strong>admin</strong> / <strong>admin123</strong>. Change these credentials before deployment.</div>
+<div style="margin-top:18px"><a class="button secondary" href="/student">Go to Student Result Portal →</a></div>
+</section>
+{% endblock %}
